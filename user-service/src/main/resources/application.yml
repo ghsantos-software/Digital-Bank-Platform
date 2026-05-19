@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: user-service
+  config:
+    # Pulls full config from config-server at startup.
+    # "optional:" means the service still starts if config-server is unavailable.
+    import: "optional:configserver:${CONFIG_SERVER_URL:http://localhost:8888}"
+
+server:
+  port: 8081
