@@ -118,6 +118,7 @@ services:
     build: ./discovery-service
     container_name: dbp-discovery
     restart: unless-stopped
+    mem_limit: 384m
     ports:
       - "8761:8761"
     healthcheck:
@@ -131,6 +132,7 @@ services:
     build: ./config-server
     container_name: dbp-config-server
     restart: unless-stopped
+    mem_limit: 384m
     environment:
       EUREKA_URL: http://discovery-service:8761/eureka
     ports:
@@ -149,6 +151,7 @@ services:
     build: ./api-gateway
     container_name: dbp-api-gateway
     restart: unless-stopped
+    mem_limit: 512m
     environment:
       EUREKA_URL: http://discovery-service:8761/eureka
       CONFIG_SERVER_URL: http://config-server:8888
@@ -167,6 +170,7 @@ services:
     build: ./user-service
     container_name: dbp-user-service
     restart: unless-stopped
+    mem_limit: 512m
     environment:
       EUREKA_URL: http://discovery-service:8761/eureka
       CONFIG_SERVER_URL: http://config-server:8888
@@ -198,6 +202,7 @@ services:
     build: ./account-service
     container_name: dbp-account-service
     restart: unless-stopped
+    mem_limit: 512m
     environment:
       EUREKA_URL: http://discovery-service:8761/eureka
       CONFIG_SERVER_URL: http://config-server:8888
@@ -227,6 +232,7 @@ services:
     build: ./transaction-service
     container_name: dbp-transaction-service
     restart: unless-stopped
+    mem_limit: 512m
     environment:
       EUREKA_URL: http://discovery-service:8761/eureka
       CONFIG_SERVER_URL: http://config-server:8888
