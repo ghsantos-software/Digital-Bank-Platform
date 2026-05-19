@@ -27,15 +27,15 @@ public class OpenApiConfig {
                                 Content-Type: application/x-www-form-urlencoded
 
                                 grant_type=password&client_id=digital-bank-client
-                                  &username=customer1&password=Customer@123
+                                  &username=customer1@digitalbank.com&password=admin123
                                 ```
                                 Copy the `access_token` and paste it in the **Authorize** button above.
-                                **Block endpoint** requires ADMIN role — use `admin-user / Admin@123`.
+                                **Block endpoint** requires ADMIN role — use `admin@digitalbank.com / admin123`.
                                 """)
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("Digital Bank Platform")
-                                .url("https://github.com/your-repo/digital-bank-platform")))
+                                .url("https://github.com/your-username/digital-bank-platform")))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth", new SecurityScheme()
