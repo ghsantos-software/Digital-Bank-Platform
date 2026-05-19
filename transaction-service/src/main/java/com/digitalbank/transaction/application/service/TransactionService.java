@@ -18,7 +18,9 @@ import com.digitalbank.transaction.infrastructure.messaging.TransactionEventPubl
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -129,10 +131,9 @@ public class TransactionService {
         LocalDateTime toDt   = to   != null ? to.atTime(LocalTime.MAX) : null;
 
         String typeStr = type != null ? type.name() : null;
-        // Native query already has ORDER BY — strip pageable sort to avoid Spring Data
-        // translating Java field names (updatedAt) into non-existent column aliases.
-        org.springframework.data.domain.PageRequest unsorted =
-                org.springframework.data.domain.PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
+        // Strip sort from pageable — the native query has its own ORDER BY and Spring Data
+        // would otherwise append the Java field name (updatedAt) instead of the column name.
+        PageRequest unsorted = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize());
         Page<Transaction> page = transactionRepository.findStatement(accountId, fromDt, toDt, typeStr, unsorted);
 
         BigDecimal totalCredit = transactionRepository.sumCredits(accountId, fromDt, toDt, typeStr);
@@ -207,8 +208,7 @@ public class TransactionService {
     }
 
     private String extractPerformedBy() {
-        var auth = org.springframework.security.core.context.SecurityContextHolder
-                .getContext().getAuthentication();
+        var auth = SecurityContextHolder.getContext().getAuthentication();
         if (auth instanceof JwtAuthenticationToken jwtAuth) {
             return jwtAuth.getToken().getSubject();
         }
