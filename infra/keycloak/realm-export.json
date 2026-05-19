@@ -55,7 +55,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "Admin@123",
+          "value": "admin123",
           "temporary": false
         }
       ],
@@ -71,7 +71,7 @@
       "credentials": [
         {
           "type": "password",
-          "value": "Customer@123",
+          "value": "admin123",
           "temporary": false
         }
       ],
