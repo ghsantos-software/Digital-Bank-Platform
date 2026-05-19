@@ -1,7 +1,6 @@
 package com.digitalbank.transaction.domain.repository;
 
 import com.digitalbank.transaction.domain.model.Transaction;
-import com.digitalbank.transaction.domain.model.TransactionType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,7 +17,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
 
     Optional<Transaction> findByIdempotencyKey(UUID idempotencyKey);
 
-    // Generic history — used by the existing paginated list endpoint
     @Query("""
         SELECT t FROM Transaction t
         WHERE t.sourceAccountId = :accountId
@@ -27,10 +25,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
         """)
     Page<Transaction> findAllByAccountId(UUID accountId, Pageable pageable);
 
-    // ─── Statement queries ────────────────────────────────────────────────────
-
-    // COMPLETED transactions for an account, with optional date range and type filters.
-    // Uses native SQL so that NULL enum parameters are cast to text (avoids "could not determine data type" in PostgreSQL).
+    // Native SQL — NULL enum params need CAST(:x AS text) to avoid "could not determine data type" in PostgreSQL.
     @Query(value = """
         SELECT * FROM transactions t
         WHERE (t.source_account_id = :accountId OR t.destination_account_id = :accountId)

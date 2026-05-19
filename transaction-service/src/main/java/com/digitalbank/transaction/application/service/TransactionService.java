@@ -175,8 +175,6 @@ public class TransactionService {
         log.warn("Transaction {} marked as FAILED — reason: {}", transactionId, reason);
     }
 
-    // ─── private helpers ──────────────────────────────────────────────────────
-
     private StatementTransactionRow toStatementRow(Transaction tx, UUID accountId) {
         boolean isCredit = isCredit(tx, accountId);
         UUID counterpart = isCredit ? tx.getSourceAccountId() : tx.getDestinationAccountId();
