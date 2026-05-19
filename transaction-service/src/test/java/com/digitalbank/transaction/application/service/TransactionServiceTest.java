@@ -142,7 +142,7 @@ class TransactionServiceTest {
 
         assertThatThrownBy(() -> transactionService.create(request))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("Saldo insuficiente")
+                .hasMessageContaining("Insufficient balance")
                 .hasMessageContaining("50.00")
                 .hasMessageContaining("200.00");
     }
@@ -157,7 +157,7 @@ class TransactionServiceTest {
 
         assertThatThrownBy(() -> transactionService.create(request))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("não está ativa")
+                .hasMessageContaining("is not active")
                 .hasMessageContaining("BLOCKED");
     }
 
@@ -199,10 +199,10 @@ class TransactionServiceTest {
         when(transactionRepository.findById(tx.getId())).thenReturn(Optional.of(tx));
         when(transactionRepository.save(tx)).thenReturn(tx);
 
-        transactionService.markFailed(tx.getId(), "Saldo insuficiente na conta 10000001");
+        transactionService.markFailed(tx.getId(), "Insufficient balance on account 10000001");
 
         assertThat(tx.getStatus()).isEqualTo(TransactionStatus.FAILED);
-        assertThat(tx.getFailureReason()).isEqualTo("Saldo insuficiente na conta 10000001");
+        assertThat(tx.getFailureReason()).isEqualTo("Insufficient balance on account 10000001");
     }
 
     @Test
