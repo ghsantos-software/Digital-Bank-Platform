@@ -139,7 +139,7 @@ public class AccountService {
 
         if (account.getBalance().compareTo(amount) < 0) {
             throw new BusinessException(
-                    "Saldo insuficiente na conta %s — disponível: R$ %s, solicitado: R$ %s"
+                    "Insufficient balance on account %s — available: R$ %s, requested: R$ %s"
                             .formatted(account.getAccountNumber(), account.getBalance(), amount));
         }
 
@@ -160,7 +160,7 @@ public class AccountService {
     private void requireActive(Account account) {
         if (account.getStatus() != AccountStatus.ACTIVE) {
             throw new BusinessException(
-                    "A conta %s não está ativa — status atual: %s"
+                    "Account %s is not active — current status: %s"
                             .formatted(account.getAccountNumber(), account.getStatus()));
         }
     }

@@ -69,7 +69,7 @@ public class TransactionService {
         if (request.type() == TransactionType.WITHDRAWAL || request.type() == TransactionType.TRANSFER) {
             if (source.balance().compareTo(request.amount()) < 0) {
                 throw new BusinessException(
-                        "Saldo insuficiente: disponível R$ %s, solicitado R$ %s"
+                        "Insufficient balance — available: R$ %s, requested: R$ %s"
                                 .formatted(source.balance(), request.amount()));
             }
         }
@@ -201,7 +201,7 @@ public class TransactionService {
     private AccountSummary fetchActiveAccount(UUID accountId) {
         AccountSummary account = accountClient.findById(accountId);
         if (!"ACTIVE".equals(account.status())) {
-            throw new BusinessException("Conta %s não está ativa (status atual: %s)"
+            throw new BusinessException("Account %s is not active — current status: %s"
                     .formatted(accountId, account.status()));
         }
         return account;
