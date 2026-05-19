@@ -35,7 +35,7 @@ public class OpenApiConfig {
                         .version("1.0.0")
                         .contact(new Contact()
                                 .name("Digital Bank Platform")
-                                .url("https://github.com/your-username/digital-bank-platform")))
+                                .url("https://github.com/gh1santos/Digital-Bank-Platform")))
                 .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth", new SecurityScheme()
