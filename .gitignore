@@ -3,16 +3,30 @@ target/
 *.jar
 *.war
 *.class
+.mvn/
+mvnw
+mvnw.cmd
 
-# IDE
+# IDE — IntelliJ
 .idea/
 *.iml
+*.iws
+out/
+
+# IDE — VS Code
 .vscode/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+
+# IDE — Eclipse
+.classpath
+.project
+.settings/
+.factorypath
+
+# IDE — NetBeans
+nbproject/
+
+# AI assistant settings
+.claude/
 
 # Environment
 .env
@@ -23,4 +37,10 @@ logs/
 
 # OS
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker overrides (local only)
+docker-compose.override.yml
