@@ -25,14 +25,6 @@ public class BalanceUpdatedConsumer {
     private final TransactionRepository transactionRepository;
     private final TransactionEventPublisher eventPublisher;
 
-    /**
-     * Consumes balance.updated events from account-service.
-     *
-     * @RetryableTopic auto-creates retry topics and a DLT:
-     *   balance.updated-retry-0  (delay: 2s)
-     *   balance.updated-retry-1  (delay: 4s)
-     *   balance.updated-dlt      (after all retries exhausted)
-     */
     @RetryableTopic(
             attempts = "3",
             backoff = @Backoff(delay = 2000, multiplier = 2.0),

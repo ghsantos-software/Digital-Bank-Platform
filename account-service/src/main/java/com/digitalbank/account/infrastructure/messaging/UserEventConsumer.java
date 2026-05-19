@@ -28,8 +28,7 @@ public class UserEventConsumer {
         try {
             accountService.createDefault(event.userId());
         } catch (Exception ex) {
-            // Log and continue — dead-letter queue or retry policy should be configured
-            // for production; for this portfolio the idempotency is handled at the DB level
+            // Log and continue — idempotency is handled at the DB level
             log.error("Failed to create default account for userId: {} — {}",
                     event.userId(), ex.getMessage(), ex);
         }
