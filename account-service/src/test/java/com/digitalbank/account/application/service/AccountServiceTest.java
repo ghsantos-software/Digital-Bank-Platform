@@ -107,7 +107,7 @@ class AccountServiceTest {
 
         assertThatThrownBy(() -> accountService.processTransaction(event))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("Saldo insuficiente")
+                .hasMessageContaining("Insufficient balance")
                 .hasMessageContaining("10000001")
                 .hasMessageContaining("1000.00")
                 .hasMessageContaining("1500.00");
@@ -134,7 +134,7 @@ class AccountServiceTest {
 
         assertThatThrownBy(() -> accountService.processTransaction(event))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("não está ativa")
+                .hasMessageContaining("is not active")
                 .hasMessageContaining("BLOCKED");
     }
 
@@ -159,7 +159,7 @@ class AccountServiceTest {
 
         assertThatThrownBy(() -> accountService.processTransaction(event))
                 .isInstanceOf(BusinessException.class)
-                .hasMessageContaining("Saldo insuficiente");
+                .hasMessageContaining("Insufficient balance");
 
         // Savings account must never be touched
         verify(accountRepository, never()).findById(savingsAccount.getId());
