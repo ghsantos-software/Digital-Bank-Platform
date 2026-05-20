@@ -24,8 +24,6 @@ public class KafkaTopicConfig {
                 .build();
     }
 
-    // balance.updated is owned by account-service, but declaring here allows
-    // transaction-service to auto-create it if it doesn't exist yet
     @Bean
     public NewTopic balanceUpdatedTopic() {
         return TopicBuilder.name("balance.updated")

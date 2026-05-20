@@ -22,7 +22,6 @@ public class TransactionEventConsumer {
     private final AccountService accountService;
     private final BalanceUpdatedPublisher balanceUpdatedPublisher;
 
-    // Retries: 3 attempts with 2s/4s backoff. On exhaustion → transaction.created-dlt
     @RetryableTopic(
             attempts = "3",
             backoff = @Backoff(delay = 2000, multiplier = 2.0),
