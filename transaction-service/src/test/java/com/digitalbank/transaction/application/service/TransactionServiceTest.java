@@ -68,7 +68,6 @@ class TransactionServiceTest {
         SecurityContextHolder.clearContext();
     }
 
-    // ─── idempotency ─────────────────────────────────────────────────────────
 
     @Test
     void create_duplicateIdempotencyKey_returnsExistingTransaction() {
@@ -106,7 +105,6 @@ class TransactionServiceTest {
         verify(eventPublisher).publishTransactionCreated(any());
     }
 
-    // ─── validation ──────────────────────────────────────────────────────────
 
     @Test
     void create_transfer_missingDestination_throws() {
@@ -161,7 +159,6 @@ class TransactionServiceTest {
                 .hasMessageContaining("BLOCKED");
     }
 
-    // ─── performedBy (audit) ─────────────────────────────────────────────────
 
     @Test
     void create_capturesJwtSubjectAsPerformedBy() {
@@ -180,7 +177,6 @@ class TransactionServiceTest {
         transactionService.create(depositRequest(sourceAccountId, new BigDecimal("100.00"), null));
     }
 
-    // ─── status transitions ──────────────────────────────────────────────────
 
     @Test
     void markCompleted_setsStatusCompleted() {
@@ -214,7 +210,6 @@ class TransactionServiceTest {
                 .isInstanceOf(ResourceNotFoundException.class);
     }
 
-    // ─── helpers ─────────────────────────────────────────────────────────────
 
     private Transaction pendingTransaction(UUID idempotencyKey) {
         return Transaction.builder()

@@ -58,7 +58,6 @@ class UserServiceTest {
         );
     }
 
-    // ─── create ──────────────────────────────────────────────────────────────
 
     @Test
     void create_success_publishesEventAndReturnsResponse() {
@@ -102,7 +101,6 @@ class UserServiceTest {
         verify(userRepository, never()).save(any());
     }
 
-    // ─── findById ────────────────────────────────────────────────────────────
 
     @Test
     void findById_exists_returnsResponse() {
@@ -122,7 +120,6 @@ class UserServiceTest {
                 .hasMessageContaining("User");
     }
 
-    // ─── update ──────────────────────────────────────────────────────────────
 
     @Test
     void update_inactiveUser_throws() {
@@ -162,7 +159,6 @@ class UserServiceTest {
         verify(userRepository, never()).existsByEmailAndIdNot(any(), any());
     }
 
-    // ─── deactivate ──────────────────────────────────────────────────────────
 
     @Test
     void deactivate_activeUser_setsInactive() {

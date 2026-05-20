@@ -60,7 +60,6 @@ class AccountServiceTest {
                 .build();
     }
 
-    // ─── getBalance ──────────────────────────────────────────────────────────
 
     @Test
     void getBalance_returnsSnapshot() {
@@ -74,7 +73,6 @@ class AccountServiceTest {
         assertThat(balance.checkedAt()).isNotNull();
     }
 
-    // ─── processTransaction — DEPOSIT ────────────────────────────────────────
 
     @Test
     void processDeposit_creditsSourceAccount() {
@@ -87,7 +85,6 @@ class AccountServiceTest {
         verify(accountRepository).save(checkingAccount);
     }
 
-    // ─── processTransaction — WITHDRAWAL ─────────────────────────────────────
 
     @Test
     void processWithdrawal_debitsSourceAccount() {
@@ -138,7 +135,6 @@ class AccountServiceTest {
                 .hasMessageContaining("BLOCKED");
     }
 
-    // ─── processTransaction — TRANSFER ───────────────────────────────────────
 
     @Test
     void processTransfer_debitsSourceAndCreditsDestination() {
@@ -166,7 +162,6 @@ class AccountServiceTest {
         assertThat(checkingAccount.getBalance()).isEqualByComparingTo("1000.00");
     }
 
-    // ─── block ───────────────────────────────────────────────────────────────
 
     @Test
     void block_activeAccount_setsBlocked() {
@@ -207,7 +202,6 @@ class AccountServiceTest {
                 .isInstanceOf(ResourceNotFoundException.class);
     }
 
-    // ─── helpers ─────────────────────────────────────────────────────────────
 
     private TransactionCreatedEvent depositEvent(UUID accountId, BigDecimal amount) {
         return new TransactionCreatedEvent(UUID.randomUUID(), accountId, null, amount, "DEPOSIT", LocalDateTime.now());

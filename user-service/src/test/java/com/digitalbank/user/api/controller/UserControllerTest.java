@@ -51,7 +51,6 @@ class UserControllerTest {
         );
     }
 
-    // ─── POST /api/v1/users (public) ─────────────────────────────────────────
 
     @Test
     void createUser_validPayload_returns201() throws Exception {
@@ -89,7 +88,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.message").value("Email already in use: joao@email.com"));
     }
 
-    // ─── GET /api/v1/users (ADMIN only) ──────────────────────────────────────
 
     @Test
     void listUsers_withoutAuth_returns401() throws Exception {
@@ -116,7 +114,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.content[0].email").value("joao@email.com"));
     }
 
-    // ─── GET /api/v1/users/{id} (authenticated) ──────────────────────────────
 
     @Test
     void getUser_withoutAuth_returns401() throws Exception {
@@ -145,7 +142,6 @@ class UserControllerTest {
                 .andExpect(jsonPath("$.status").value(404));
     }
 
-    // ─── DELETE /api/v1/users/{id} (ADMIN only) ──────────────────────────────
 
     @Test
     void deleteUser_asCustomer_returns403() throws Exception {
