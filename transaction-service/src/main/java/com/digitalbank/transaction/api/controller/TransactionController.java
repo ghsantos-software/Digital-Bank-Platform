@@ -35,15 +35,8 @@ public class TransactionController {
 
     @Operation(
         summary = "Initiate a financial transaction",
-        description = """
-            Creates a **DEPOSIT**, **WITHDRAWAL** or **TRANSFER**.
-
-            The transaction is saved as `PENDING` and processed asynchronously via Kafka.
-            Account balances are updated by account-service after validation.
-
-            **Idempotency:** supply the same `idempotencyKey` to safely retry without double-processing.
-            If the key was already used, the original transaction is returned with HTTP 200.
-            """
+        description = "Creates a DEPOSIT, WITHDRAWAL or TRANSFER. Saved as PENDING and processed asynchronously. " +
+                      "Reusing the same idempotencyKey returns the original transaction with HTTP 200."
     )
     @ApiResponses({
         @ApiResponse(responseCode = "201", description = "Transaction created (status: PENDING)"),
@@ -85,21 +78,8 @@ public class TransactionController {
 
     @Operation(
         summary = "Bank statement for an account",
-        description = """
-            Returns a paginated bank statement showing only **COMPLETED** transactions.
-
-            Each row includes:
-            - `direction`: **CREDIT** (money in) or **DEBIT** (money out) from this account's perspective
-            - `typeLabel`: human-readable type in Portuguese
-            - `counterpartAccountId`: the other account involved in the operation
-
-            The response also includes **period totals** (`totalCredit`, `totalDebit`) calculated
-            over the entire filtered period, independent of pagination.
-
-            **Filters (all optional):**
-            - `from` / `to` — date range (ISO format: `yyyy-MM-dd`)
-            - `type` — one of `DEPOSIT`, `WITHDRAWAL`, `TRANSFER`
-            """
+        description = "Returns paginated COMPLETED transactions with direction (CREDIT/DEBIT), period totals, " +
+                      "and optional filters by date range and transaction type."
     )
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Statement returned"),

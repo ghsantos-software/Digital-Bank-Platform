@@ -48,14 +48,7 @@ public class AccountController {
         return ResponseEntity.ok(accountService.findById(id));
     }
 
-    @Operation(
-        summary = "Get current account balance",
-        description = """
-            Returns a real-time balance snapshot for the account.
-            Includes `checkedAt` timestamp to indicate when the read occurred.
-            Use this endpoint for displaying the current balance on dashboards.
-            """
-    )
+    @Operation(summary = "Get current account balance")
     @ApiResponses({
         @ApiResponse(responseCode = "200", description = "Balance retrieved"),
         @ApiResponse(responseCode = "404", description = "Account not found")
