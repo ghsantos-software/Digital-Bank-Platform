@@ -10,7 +10,7 @@ spring:
       connection-timeout: 30000
   jpa:
     hibernate:
-      ddl-auto: validate         # schema is managed by Flyway
+      ddl-auto: validate
     show-sql: false
     properties:
       hibernate:

@@ -10,7 +10,7 @@ spring:
       connection-timeout: 30000
   jpa:
     hibernate:
-      ddl-auto: validate         # schema is managed by Flyway
+      ddl-auto: validate
     show-sql: false
     properties:
       hibernate:
@@ -35,14 +35,12 @@ spring:
         retries: 3
         max.in.flight.requests.per.connection: 5
     consumer:
-      # Default group — used by UserEventConsumer
       group-id: account-service-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: "com.digitalbank.*"
-        # TransactionEventConsumer overrides this per-listener (groupId: account-transaction-group)
         spring.json.value.default.type: "com.digitalbank.account.infrastructure.messaging.UserCreatedEvent"
   jackson:
     serialization:

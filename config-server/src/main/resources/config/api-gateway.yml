@@ -5,7 +5,6 @@ spring:
       port: ${REDIS_PORT:6379}
   cloud:
     gateway:
-      # lb:// resolves via Eureka — no hard-coded host:port
       routes:
         - id: user-service
           uri: lb://user-service
