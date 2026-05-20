@@ -31,7 +31,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Kafka in KRaft mode — no Zookeeper needed (official Apache image)
   kafka:
     image: apache/kafka:3.7.0
     container_name: dbp-kafka
@@ -59,7 +58,6 @@ services:
       retries: 5
       start_period: 20s
 
-  # Keycloak imports the realm on startup — first boot takes ~60s
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.1
     container_name: dbp-keycloak
