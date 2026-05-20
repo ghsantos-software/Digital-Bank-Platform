@@ -23,7 +23,6 @@ CREATE INDEX idx_transactions_dest_account    ON transactions (destination_accou
 CREATE INDEX idx_transactions_status          ON transactions (status);
 CREATE INDEX idx_transactions_created_at      ON transactions (created_at DESC);
 
-COMMENT ON TABLE  transactions                     IS 'Financial transaction records (immutable audit log)';
 COMMENT ON COLUMN transactions.idempotency_key      IS 'Client-supplied or auto-generated UUID — prevents duplicate processing';
 COMMENT ON COLUMN transactions.source_account_id    IS 'For DEPOSIT: account credited. For WITHDRAWAL/TRANSFER: account debited.';
 COMMENT ON COLUMN transactions.destination_account_id IS 'Only populated for TRANSFER — the account receiving the funds';

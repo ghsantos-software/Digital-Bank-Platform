@@ -17,6 +17,5 @@ CREATE TABLE users (
 CREATE INDEX idx_users_email  ON users (email);
 CREATE INDEX idx_users_status ON users (status);
 
-COMMENT ON TABLE  users             IS 'Platform users';
-COMMENT ON COLUMN users.cpf         IS 'Brazilian individual taxpayer registry (CPF) — formatted as 000.000.000-00';
-COMMENT ON COLUMN users.status      IS 'ACTIVE | INACTIVE (soft-deleted) | BLOCKED';
+COMMENT ON COLUMN users.cpf    IS 'Brazilian individual taxpayer registry (CPF) — formatted as 000.000.000-00';
+COMMENT ON COLUMN users.status IS 'ACTIVE | INACTIVE (soft-deleted) | BLOCKED';

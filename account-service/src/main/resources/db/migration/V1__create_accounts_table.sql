@@ -25,7 +25,3 @@ CREATE TABLE accounts (
 CREATE INDEX idx_accounts_user_id ON accounts (user_id);
 CREATE INDEX idx_accounts_status  ON accounts (status);
 
-COMMENT ON TABLE  accounts                IS 'Bank accounts — one user may have multiple accounts';
-COMMENT ON COLUMN accounts.account_number IS 'Auto-generated 8-digit number from account_number_seq';
-COMMENT ON COLUMN accounts.branch         IS 'Bank branch number (default 0001)';
-COMMENT ON COLUMN accounts.balance        IS 'Current balance in BRL — always >= 0';
